@@ -1,0 +1,301 @@
+#people
+Muhammad ibn Musa Al-Khqarizmi was a Persian mathematician created Algebra and algoritms and lived in 820 CE
+Ada Lovelace was the first programmer (1815-1852) 
+Alan Turing developed the first modern computers by decodign the encryption of German Enigma machines in WW2
+
+#expressions
+
+% called modulus gives remainders after division
+ex: 8%3 = 2 because 8/3 = 6 * (2/3)
+
+// called floor divison gives closest whole number of divison
+ex: 7//3 = 2 and 27//157890 = 0
+
+x += 3 is the same as x = x + 3 
+
+== is equal to
+!= is not equal to 
+
+32//8 == 32.0/8 is TRUE because 4 = 4.0
+
+
+
+#Turtle
+
+import turtle
+bob = turtle.Turtle()
+bob.shape("turtle") 
+
+bob.color('green')      # set the color
+bob.forward(50)         # draw a green line of length 50
+bob.up()                # lift up the tail
+bob.forward(50)         # move forward 50 without drawing
+bob.right(90)           # change direction to the right, left works too
+bob.down()              # put the tail down
+bob.backward(100)       # draw a green line 100 units long
+
+#def a square
+
+def drawSquare(bob, side):
+  for i in range(4):
+    bob.fd(side)
+    bob.rt(90)
+    
+#ElTetrimo (L shaped tetris shape)
+
+def drawElTetrimo(bob):
+  for i in range(2):
+    drawSquare(bob,50)
+    bob.rt(90)
+    bob.fd(50)
+    bob.lt(90)
+  drawSquare(bob,50)
+  bob.fd(50)
+  drawSquare(bob,50)
+  bob.hideturtle() #makes bob hide
+
+drawElTetrimo(bob)
+
+#T-tetromino (T shaped tetris shape)
+
+def drawTeeTetromino(bob):
+    drawSquare(bob,50)
+    bob.rt(90)
+    bob.forward(50)
+    drawSquare(bob,50)
+    bob.rt(90)
+    bob.forward(50)
+    drawSquare(bob,50)
+    bob.rt(90)
+    bob.forward(50)
+    bob.rt(90)
+    bob.forward(50)    
+    bob.hideturtle()
+
+drawTeeTetromino(bob)
+bob.hideturtle()
+
+
+#Straight-Tetromino 
+
+def drawTetromino(bob,side):
+    drawSquare(bob,side)
+    for x in range(3):
+        bob.fd(side)
+        drawSquare(bob,side)
+
+bob.penup()        
+bob.backward(100) #makes the shape be in the center of the window
+bob.pendown()
+
+drawTetromino(bob,50)
+bob.hideturtle()
+
+#Square-Tetromino
+
+def drawSquareTetromino(bob,side):
+    drawSquare(bob,side)
+    bob.fd(side)
+    drawSquare(bob,side)
+    for i in range (2):
+        bob.fd(side)
+        bob.rt(90)
+        bob.fd(side)
+        drawSquare(bob,side)
+        
+        
+bob.penup()        #makes the shape be in the center of the window
+bob.backward(50)
+bob.lt(90)
+bob.fd(50)
+bob.rt(90)
+bob.pendown()
+
+drawSquareTetromino(bob,50)
+bob.hideturtle()
+
+#Skew-Tetromino
+
+def drawSkewTetromino(bob,side):
+    drawSquare(bob,side)
+    bob.fd(side)
+    drawSquare(bob,side)
+    bob.lt(90)
+    bob.fd(50)
+    bob.rt(90)
+    drawSquare(bob,side)
+    bob.fd(side)
+    drawSquare(bob,side)
+        
+        
+bob.penup()      #makes the shape be in the center of the window  
+bob.backward(75) 
+bob.pendown()
+
+drawSkewTetromino(bob,50)
+bob.hideturtle()
+
+#four squares overlapping
+def FourSquares(bob,side):
+    for i in range(4):
+        drawSquare(bob,side)
+        bob.penup()
+        bob.fd(side/2)
+        bob.rt(90)
+        bob.fd(side/2)
+        bob.lt(90)
+        bob.pendown()
+
+FourSquares(bob,50)
+
+
+
+#draw 5 pointed star
+for i in range(5):
+    bob.forward(110)
+    bob.left(216)
+
+#n sided shape
+num_of_sides = int(input("number of sides"))
+
+angle = 360/num_of_sides
+
+for x in range(num_of_sides):
+    bob.fd(side)
+    bob.left(angle)
+    
+    
+#make a circle with radius r
+pi = 3.14
+r = 30 #int(input("give radius length")
+
+circ = 2*pi*r
+
+num_of_sides = 40 #int(input("number of sides"))
+
+side_length =  circ/40
+
+angle = 360/num_of_sides
+
+for x in range(num_of_sides):
+    bob.fd(side_length)
+    bob.left(angle)
+    
+#Triforce 
+side = 120
+bob.fd(side)
+bob.left(120)
+bob.fd(side)
+bob.left(120)
+bob.fd(side)
+bob.left(120)
+bob.fd(60)
+bob.left(60)
+bob.fd(60)
+bob.left(120)
+bob.fd(60)
+bob.left(120)
+bob.fd(60)
+
+#Seconds to Hours
+seconds = input("give me seconds, I'll tell you how many hours, minutes, and 
+seconds it is: ")
+seconds = int(seconds)
+hours = seconds //(60*60)       #gives whole number of hours in seconds
+remainder = seconds %(60*60)    #gives the left over seconds from the hours
+minutes = remainder // 60       #gives whole number of minutes in the left over seconds
+remainder_2 = remainder % 60    #gives the left over seconds from minutes
+seconds_2 = remainder_2 #left over seconds
+print( seconds, "seconds is ", hours, "hours", minutes, "minutes and", remainder_2,
+"seconds")
+
+
+'''
+write a function printThrees(limit), which prints all positive integers less than limit 
+that are divisible by 3. If limit is less than or equal to 0, print nothing.
+'''
+def printThrees(limit):
+    for i in range (0, limit, 3): #the 3 in this is the step, default is 1
+        print(i)
+
+#sep and end
+
+print("Hello",'World', 1)             # will print Hello World 1
+print("Hello",'World', 1, sep='_')    # will print Hello_World_1
+print("Hello",'World', 1, sep='taco') # will print HellotacoWorldtaco1
+print("Hello",'World', 1, sep='')     # will print HelloWorld1
+print("Hello",'World', 1, sep=' ')    # the default behavior
+
+
+for i in range(5):
+print(i,end="")       # will print 01234
+print()               #goes to a new line of output
+
+#bottles of beer
+
+n = int(input("What number of beers are we starting with?"))
+for x in range(n):
+    print( n ,"bottles of beer on the wall,", n ,"bottles of beer")
+    n = n-1
+    print("Take one down, pass it around,", n, "bottles of beer on the wall")
+
+
+#Nested Loops
+adj = ["red", "big", "tasty"]
+fruits = ["apple", "banana", "cherry"]
+
+for x in adj:
+  for y in fruits:
+    print(x, y)
+
+
+
+
+
+
+
+
+
+
+
+
+#What is a good question to ask on this exam and why?
+Q: Edit the following code or make up your own to create a triangle spiral that is a specific color. Extra 
+credit if you can make the color change too. 
+
+import turtle
+
+bob = turtle.Turtle()
+side = 15
+                      #define angle
+                      #make bob a specifc color
+ 
+for i in range(10):
+    bob.forward(side)
+    bob.right(angle)
+                      #add something here to make the spiral shape
+
+
+A: 
+import turtle
+
+bob = turtle.Turtle()
+side = 15
+angle = 120 
+colors = ("red", "yellow", "green", "blue")
+
+for i in range(10):
+    for color in colors:
+        bob.forward(side)
+        bob.right(120)
+        side+=5
+        bob.color(color)
+
+The reason why this is a good question is because it covers dynamic drawings 
+using for loops. 
+
+
+
+
+
+
