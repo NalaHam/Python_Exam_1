@@ -1,0 +1,245 @@
+1. (2 points) The string value “Howl’s Moving Castle” is a valid string. 
+    Why isn’t it a problem that the single quote character in the word Howl’s isn’t escaped?
+            Python recognizes that double quotes are using to define the string. 
+
+2. (2 points) What is the main difference between a dictionary and a list?
+          List shows a order of things. Dictionaries have keys and have other things associated with the key. 
+          accessed the same way in python.
+
+3. (3 points) If l is a list, what does the expression l[::-1] do?
+         Everything in the list, starting from -1 (or the end)
+
+4. (3 points) How can you slice notation to get the last 3 characters of a string?
+         str[len(str)-3:]
+         or
+         str[-3:]
+
+5. (2 points) How can you simulate a coin flip in python?
+         import random
+         random.randint[1,2] where heads is 1 and tails is 2
+         or
+         random.choice["H", "T"]
+
+6. (3 points) I have a coin that is slightly weighted in favor of heads; 
+it will land on heads 55% of the time. How would you simulate this in python using the random module?
+         import random
+         random.choice(["H"]*55+["T"]*45)
+         or 
+         if random.random() > 0.55: 
+              print("Heads")
+         else:
+              print("Tails")
+
+
+7. (20 points) From A Prior Exam Suppose we had a file called temperature.csv, which contains 
+the daily high and low temperatures recorded in Philadelphia. The file is composed of three 
+fields per a line, containing the date, the high temperature, and the low temperature. 
+Each field is separated commas. For example, the contents of the file might look like this:
+                          11/11/19, 64, 40 
+                          11/12/19, 49, 21 
+                          11/13/19, 33, 22 
+                          ... ... ...
+
+Write a program that calculates or prints the following:
+5pts The day with the hottest high temperature. 
+5pts The day with the coldest low temperature. 
+10pts The average high temperature of the entire file.
+
+          def readTemp(filename):
+              data = open(filename, "r")
+              hottestHot = -10000000
+              hottestDay = ""
+              coldestCold = 1000000
+              coldestDay = ""
+              allHighs = 0
+              num_days = 0 
+              for line in data:
+                     fields = line.split(",") #[data, high,low]
+                     high = int(fields[1])
+                     low = int(fields[2])
+                     if high > hottestHot:
+                          hottestHot = high
+                          hottestDay = fields[0]
+                     if low < coldestCold:
+                          coldestCold = low
+                          coldestDay = fields[0]
+                     
+                     allHighs += high
+                     num_days += 1
+               print(hottestDay, coldestDay, allHighs/num_days)
+           
+          readTemp("temperature.csv")
+      
+
+8. (0 points) This question is extra practice.
+Suppose you have a file named numbers.csv which contains a bunch of integers, 
+five per line of text, separated by commas. Write code below that will open the file, 
+read the numbers from it, and print the sum of all the even numbers in the file. 
+For example, the file might look like this:
+   353,213,5,12399421,1
+   -4,3243,2323456,32186,4234
+   123,1,2,3,4
+   0,8,6,-3,2
+
+def readNums(filename):
+    data = opem(filename, "r")
+    lines = data.readlines()
+    total = 0 
+    for line in lines:            #looks like x,y,z,a,b 
+        parts = line.split(",")   #makes a list ['x','y','z','a','b']
+        for val in parts:
+            if val % 2 == 0:
+                total += int(val)
+        
+    return total
+
+9. (10 points) unOrUn: If the given String begins with “un”, 
+return a String with without the “un” in front. Otherwise, 
+return the String with “un” added to the front of it. 
+You may assume the String is at least 3 characters long.
+# unOrUn("untied") -> "tied"
+# unOrUn("unable") -> "able"
+# unOrUn("necessary") -> "unnecessary" 
+
+def unOrUn(word):
+    if word[:2] == "un":
+        return word[2:]
+    else:
+        return "un" + word
+        
+
+10. (10 points) maxMinDiff: Given an list of integers, 
+return the difference between the maximum element and 
+the minimum element. You may assume the list will have 2 or more elements in it.
+# [1,2,3,4,5] -> 4
+# [15,31,21,17,28] -> 16
+# [-1,-100,12,2,100] -> 200 
+
+def maxMinDiff(numbers):
+    return max(numbers) - min(numbers)
+    
+or 
+
+def maxMinDiff(numbers):
+    biggest = number[0]
+    smallest = number[0]
+    
+    for x in numbers:
+        if x > biggest:
+            biggest = x
+        if x < smallest:
+            smallest = x
+    
+    return biggest - smallest
+
+
+11. (10 points) swapEnds: Given a list of numbers, 
+modify the list such that the first and last elements are swapped. 
+You may assume will have 2 or more elements in it.
+# [1,2,3,4,5] -> [5,2,3,4,1]
+# [15,31,21,17,28] -> [28,31,21,17,15]
+# [-1,-100,12,2,100] -> [100,-100,12,2,-1] 
+
+def swapEnds(numbers):
+    end = numbers[-1] 
+    start = numbers[0]
+    numbers[0] = end
+    numbers[-1] = start
+
+
+12. (10 points) firstHalf: Given a list of things, return the first half of the list.
+# [1,2,3,4,5,6] -> [1,2,3]
+# [15,31,21,17,28] -> [15,31]
+# ["a","b","c","d","e","f","g","h"] -> ["a","b","c","d"] 
+
+def firstHalf(theList):
+    length = len(theList)//2
+    return theList[:length]
+
+
+13. (10 points) Write a method called hasWildcat: Given an input String word, 
+return true if word contains the String “cat” in it, but the middle ‘a’ can be any char.
+# hasWildcat("kitty") -> false
+# hasWildcat("tomcat") -> true
+# hasWildcat("c4tn1P") -> true
+
+def hasWildcat(word): # A-- would not buy again
+  for i in range(0,len(word)-2):
+      if word[i] == "c" and word[i+2] == "t":
+          return True
+  return False
+
+
+14. (0 points) Extra Practice We’ll say that a value is “everywhere” in 
+an array if for every pair of adjacent elements in the array, at least one 
+of the pair is that value. Return true if the given value is everywhere in the array.
+
+# source: http://codingbat.com/prob/p110222 
+# isEverywhere([1, 2, 1, 3], 1) -> true
+# isEverywhere([1, 2, 1, 3], 2) -> false
+# isEverywhere([1, 2, 1, 3, 4], 1) -> false 
+
+def isEverywhere(nums, val):
+    for i in range(0, leng(nums)-1):
+        if val not in nums[i:i+2]:
+            return False
+    return True
+
+
+15. (10 points) Given a string, return the sum of the digits 0-9
+that appear in the string, ignoring all other characters. 
+Return 0 if there are no digits in the string. 
+(Note: s.isdigit() tests if a the string s is one of the characters ’0’, ’1’, ... ’9’. )
+# http://codingbat.com/prob/p197890 
+# sumStringDigits("aa1bc2d3") -> 6 
+# sumStringDigits("aa11b33") -> 8
+# sumStringDigits("Chocolate") -> 0 
+
+def sumStringDigits(word):
+    total = 0
+    for chr in word: 
+        if chr.isdigit():
+            total = total + int(chr)
+     
+    return total
+    
+    
+
+16. (5 points) Given an integer, return the sum of the digits 0-9 of that integer.
+# sumDigits(1234) -> 10 
+# sumDigits(1000) -> 1 
+# sumDigits(-581) -> 14 
+
+def sumDigits(num):
+    total = 0 
+    
+    while num >0:
+        lastDigit = num % 10
+        total += lastDigit
+        num = num // 10    #removes lastDigit
+    return total
+
+
+17. (0 points) Extra Practice Given a list of positive numbers, 
+return a new list of length “count” containing the first even numbers 
+from the original array. The original list will contain at least “count” even numbers.
+#http://codingbat.com/prob/p134174 
+#copyEvens([3, 2, 4, 5, 8], 2) -> [2, 4] 
+#copyEvens([3, 2, 4, 5, 8], 3) -> [2, 4, 8] 
+#copyEvens([6, 1, 2, 4, 5, 8], 3) -> [6, 2, 4] 
+
+def copyEvens(nums, count):
+    output = []
+    for n in nums:
+        if n % 2 == 0: 
+            output.append(n)
+        #if len(output) == count:
+        #    return output
+        
+    return output[:count]
+    
+
+
+
+
+
