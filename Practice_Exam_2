@@ -240,6 +240,156 @@ def copyEvens(nums, count):
     
 
 
+````````````` python textbook probs ``````````````
+
+Chapter 7:
+Q: Get the user to enter some text, save it to a variable called user_input, and print it out in reverse order.
+
+A: 
+user_input = "something something" #input("say something:")
+
+string = ""
+rev_string = ""
+for char in user_input[::-1]:
+    rev_string += char
+    
+print(rev_string)
+    
+Chapter 8:
+Q: Start with a test factor of 2.
+Check if the number is divisible by the test factor.
+If it is divisible, set isprime=False.
+For each odd number from 3 to 
+N/2, if N is divisible by the number, then set isprime=False
+A:
+def isprime(n):
+    count = 0
+    if n % 2 == 0:
+        return False
+    for i in range(3, n//2, 2):
+        if n % i == 0: 
+            return False
+        count += 1
+    print(True, count, sep='\n')
+
+isprime(524287)
+
+
+Q: Create a list called grades that contains for the letter grade for each score in the list scores according to the table
+A:
+scores = [77.51, 92.86, 98.01, 69.71, 78.52, 59.69, 60.49, 85.04, 87.33, 91.04]
+
+grades = []
+
+for x in scores: 
+    if x >= 90:
+        grades.append("A")
+    elif 80 <= x < 90:
+        grades.append("B")
+    elif 70 <= x < 80:
+        grades.append("C")
+    elif 60 <= x < 70:
+        grades.append("D")
+    else:
+        grades.append("F")
+
+
+Chapter 12:
+Q:The variable sentence stores a string. Write code to determine how many words in sentence start and end with the same letter, 
+including one-letter words. Store the result in the variable same_letter_count.
+A:
+sentence = "students flock to the arb for a variety of outdoor activities such as jogging and picnicking"
+
+same_letter_count = 0
+
+words = sentence.split(" ")
+
+for word in words: 
+    if word[0] == word[-1]:
+        same_letter_count += 1
+
+print(same_letter_count)
+
+
+Chapter 9:
+Q: Provided is a list of data about a store’s inventory where each item in the list represents the name of an item, how much is in stock, and how much it costs. 
+Print out each item in the list with the same formatting, using the .format method (not string concatenation). 
+For example, the first print statment should read The store has 12 shoes, each for 29.99 USD.
+A: 
+inventory = ["shoes, 12, 29.99", "shirts, 20, 9.99", "sweatpants, 25, 15.00", "scarves, 13, 7.75"]
+
+for item in inventory:
+    item = item.split(",")
+    name = item[0]
+    number = item[1]
+    cost = item[2]
+    print("The store has{} {}, each for{} USD.".format(number, name, cost))
+
+
+Q:The textfile, travel_plans.txt, contains the summer travel plans for someone with some commentary. 
+Find the total number of characters in the file and save to the variable num.
+A: 
+file = open("travel_plans.txt", "r")
+num = len(file.read())
+
+
+
+Q: We have provided a file called emotion_words.txt that contains lines of words that describe emotions.
+Find the total number of words in the file and assign this value to the variable num_words.
+A:
+words = open("emotion_words.txt", "r")
+num_words = 0
+
+#print(words.readline(1)) #shows that the words are separated by spaces
+
+for line in words:
+    line_wrds = line.split()
+    num_words += len(line_wrds)
+
+
+
+Q:Read in the contents of the file SP500.txt which has monthly data for 2016 and 2017 about the S&P 500 closing prices as well as some other financial indicators, 
+including the “Long Term Interest Rate”, which is interest rate paid on 10-year U.S. government bonds.
+
+Write a program that computes the average closing price (the second column, labeled SP500) and the highest long-term interest rate. 
+Both should be computed only for the period from June 2016 through May 2017. Save the results in the variables mean_SP and max_interest.
+A:
+file = open("SP500.txt", "r")
+#print(file.readlines(3))
+
+lines = file.readlines() #creates a list of the lines
+    
+SP = 0 
+
+interestList = []
+
+validDates = ["6/2016", "7/2016", "8/2016", "9/2016", "10/2016", "11/2016" , "12/2016", "1/2017", "2/2017", "3/2017", "4/2017", "5/2017"] 
+counter = 0
+for line in lines[1:]:
+    line = line.split(",")
+    date = line[0]               #dates are in the format 0/0/0000
+    splitDate = date.split("/")  #list with 3 objects: month, day, year
+    del splitDate[1]
+    monYear = ("{}/{}".format(splitDate[0],splitDate[1]))
+ 
+    if monYear in validDates: 
+        closingPrice = float(line[1])
+        interest = float(line[5])
+        
+        SP += closingPrice 
+        counter+=1
+        
+        interestList.append(interest)
+        
+    
+mean_SP = SP/counter
+
+max_interest = max(interestList)
+
+print("The average closing price is {} and the max interest is {}".format(mean_SP, max_interest))
+
+file.close()
+
 
 
 
