@@ -1,0 +1,42 @@
+Questions: 
+1. Turtle analysis (gives a bunch of code but everything is weirded named, you have to provide what the varibles are or do)
+2. File reading 
+3. Monte Carlo (here's a game, simmulate it (involves a 6 sided dice))
+4. List Processing
+5. Regular expressions
+
+
+Actual question from a previous final:
+
+
+text file named email_test.txt is:
+
+Professor Rosen
+Room 349
+XXX-XX-XXXX
+My email is tug85861@temple.edu or 
+also andrew.rosen@temple.edu 
+I am not rosen@temple.edu nor 
+am I tun85861@temple.edu
+
+
+Q: Remove all tuXXXXX@temple.edu emails by reading the file and then create a new file with this. 
+A:
+import re 
+
+data = open("email_test.txt", "r")
+
+output = open("email_output.txt", "w")
+
+pattern = "tu[a-z]\d{5}@temple\.edu"                         #brackets mean choose one from any of these, the period or dot symbol is a wild card (could be anything) It needs a \.
+
+for line in data:
+    line = re.sub(pattern, "[REDACTED]", line)
+    
+    output.write(line)
+
+output.close()
+
+
+
+
