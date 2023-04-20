@@ -1,0 +1,225 @@
+#ignore regular expression
+
+1. (10 points) Write a function called makeUsername that generates a a username for a given name and
+suffix, as demonstrated by the examples below. You can assume that the format of the name is either
+“FIRSTNAME LASTNAME” or “FIRSTNAME MIDDLENAME LASTNAME”1
+# ’Andrew Rosen’,12 -> ar12
+# ’Alan Turing’, 5 -> at5
+# ’Andrew Benjamin Rosen’, 3 -> abr3
+# ’Andrew Benjamin Rosen’, 104 -> abr104
+
+def makeUsername(name,n):
+  username = ""
+  name = name.lower()
+  parts = name.split()
+  for namePart in parts: 
+      username += namePart[0]
+  
+  username += str(n)
+  return username
+  
+  
+2. (10 points) XOR: Return true if only a is true or only b is true, but false if both are true or both are
+false.
+
+def XOR(a, b):
+    if a == True and b == True: 
+        return False
+    if a == False and b == False: 
+        return False   
+    if a == True and b == False: 
+        return True
+    if a == False and b == True: 
+        return True
+
+3. (10 points) sumOfThrees: Given a list that contains many lists of integers, return the sum of all the
+integers in the lists that are multiples of 3. Half credit is given if the answers works on a list of integers
+[[1,2,3,4,5,6,7,8,9,10]] -> 18
+[[10,20], [5], [20,15,1,1,1]] -> 15
+[[10,20,51], [10,20,30]] -> 30
+
+def sumOfThrees(numbers):
+  total = 0 
+  for listOfNum in numbers:
+      
+
+
+
+
+
+4. (10 points) allDigitsProduct Given a list of numbers, return the product of all digits of all the
+numbers in the list.
+# [1,2,3,4,5] -> 120
+# [10,20,5] -> 0
+# [44, 12, 3112] -> 192
+
+def allDigitsProduct(nums):
+    total = 1
+    for n in nums: 
+         n = str(abs(n))
+         for digit in n:
+            total *= int(digit)
+    return total 
+
+or 
+
+def allDigitsProduct(nums):
+    total = 1
+    for n in nums: 
+        n = abs(n)
+        while n > 0: 
+            digit = n%10
+            n = n//10
+            total *= n
+    return total 
+
+5. (10 points) has231 Given a list of numbers, return true if it follows the “231” pattern, namely that the
+list has a value x, followed by x + 1, followed by x − 1. You don’t have to print out what the numbers
+were, but we listed them in the example outputs for extra clarity.
+# [1,2,3,4,5] -> False (doesn’t contain the pattern)
+# [74,3,4,2,74,75,2] -> True (3,4,2 satisfies the pattern)
+# [74,75,0,1,-1,100] -> True (0,1,-1 satisfies the pattern)
+
+def has231(arr) :
+  for i in range(len(arr) - 2):
+      x = arr[i]
+      oneAhead = arr[i+1]
+      twoAhead = arr[i+2]
+      if x+1 == oneAhead and x-1 == twoAhead :
+          return True
+  
+  return False
+
+or 
+
+def has231(arr) :
+  for i in range(len(arr)):
+      trio = arr[i:i+3]
+      if len(trio) == 3:
+          x = trio[i]
+          oneAhead = trio[i+1]
+          twoAhead = trio[i+2]
+          if x+1 == oneAhead and x-1 == twoAhead :
+              return True
+  
+  return False
+
+6. (0 points) Write a program that simulates the game on the previous page with one player trying to get
+HHT and the other trying to get THH. 3 Have your program simulate the game 100000 times and print
+out the percentage of times the two players win.
+
+import random
+
+def flip():
+    return random.choice(["H","T"])
+
+def penny(seq1, seq2):
+    history = flip()+flip()+flip()
+    
+    while history[-3:] != seq1 and history[-3:] != seq2:
+        history += flip()
+    
+    return history[-3:] == seq1
+    
+def simPenny():
+    wins = 0 
+    Trials = 10000
+    for _ in range(Trials):
+        if penny("HHT", "THH"):
+            wins+= 1
+            
+    print(wins/Trials)     
+    
+
+From Last Year’s Exam In the board game Monopoly, players move around the board by rolling
+a pair of six-sided dice. Rolling “doubles,” such as two 3’s or two 5’s, is especially fortunate, as this
+allows the player to roll again, essentially getting the player an extra turn. If the player rolls another
+set of doubles4, this allows the player yet another extra turn. However, rolling doubles a third time will
+immediately land the player in “jail,” ending their turn and trapping the player until they can roll a
+double.
+Write a program that will simulate 100000 Monopoly turns (extra rolls due to doubles count as the
+turn), where a turn is a single roll of the dice or more if the user rolls a double. Your program should
+print out:
+• The percentage of rolls without a double.
+• The percentage of rolls with 1 double.
+• The percentage of rolls with 2 doubles.
+• The percentage of rolls with 3 doubles.
+
+7. (20 points) Put your program here:
+
+import random
+def d6():
+    return random.randint(1,6)
+
+def monoployTurn():
+    if d6() == d6():
+        if d6() == d6():
+            if d6() == d6():
+                return 3
+            else:
+                return 2
+        else:
+            return 1 
+    else:
+        return 0
+    
+def simMonopoly():
+    results = [0,0,0,0]
+    Trials = 10000
+    for _ in range(Trials):
+        numDoubles = monoployTurn()
+        results[numDoubles] += 1
+    
+    for i in range(len(results)):
+        print(i, results[i]/Trials, sep = "\t")
+        
+simMonopoly()
+
+8. (10 points) Given a string, write a function which returns the most common letter in the string. Use a
+dictionary to do this.
+
+def mostCommonLetter(text):
+    d = {}
+    for letter in text: 
+        if letter not in d: 
+            d[letter] = 1
+        else:
+            d[letter] += 1
+    
+    mostLetter = text[0]
+    for letter in d: 
+        if d[letter] > d[mostLetter]:
+            mostLetter = letter
+    
+    return mostLetter
+
+
+We are going to simulate a level 1 fighter (eg a player who just started the game) attacking a goblin and
+calculate the odds of slaying a goblin in a single strike.
+A fighter’s attack roll is 1d20+5 and the Goblin’s AC is 15, as they are quick and wear armor.
+If the attack roll hits, the fighter’s damage roll is 2d6+3. A goblin has 7 hit points.
+Calculate the odds of a fighter slaying a goblin in a single blow by simulating 100,000 attack rolls and
+their respective damage. A missed attack does 0 points of damage.
+
+9. (30 points) Calculate the odds of a fighter slaying a goblin in a single blow by simulating 100,000 attack
+rolls and their respective damage. A missed attack does 0 points of damage.
+
+
+def d20():
+    return random.randint(1,20)
+
+def attack():
+    if d20()+5 >= 15:
+        return d6()+d(6)+3 >= 7
+    else:
+        return False
+
+def simAttacks():
+    wins = 0 
+    Trials = 100000
+    for _ in range(Trails):
+        if attack():
+            wins+=1
+    print(wins/Trials)
+
+
