@@ -1,0 +1,82 @@
+1. (10 points) Write a script that given a text file, finds and returns all the superhero words in it, 
+which are words that end with “man,” “woman,” “boy,” or “girl,” such as “Supergirl” or “Batboy.”
+
+/[a-z]{1}(boy|girl|man|woman)/g
+
+import re 
+def getsupername(filename):
+    text = open(filename, "r")
+    pattern = r"[a-z]{1}boy|+[a-z]{1}girl|+[a-z]{1}man|+[a-z]{1}woman"
+    results = []
+    for line in text:
+        results += re.findall(pattern,line, re.I) #re.I ignores capitalization
+    return results
+
+
+Consider the following list.
+   LL = [[1,2,3],[4,5,6],[7,8,9],[10,11,12]]
+2. (3 points) What is the value of len(LL)? 
+A. 4
+B. 10 
+C. 3 
+D. 9
+
+3. (3 points) What is LL[2]? A. 2
+B. 7
+C. [4,5,6] D. [7,8,9]
+
+
+4. (4 points) What is sum(LL[2])? A. 6
+B. 15 C. 24 D. 33
+
+5. (10 points) Project Euler Problem 5:
+2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.
+What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?
+
+
+6. (10 points) sumDigits: Given an integer, return the sum of all the digits. You may assume we are only dealing with positive integers.
+# 4132 -> 10
+# 12 -> 3
+# 7001 -> 8
+def sumDigits(num):
+
+
+7. (10 points) Write a function that returns true if the string can be spelled the same front and backwards.
+def isPalindrome(word):
+
+
+
+8. (10 points) Write a function called makeUsername that generates a a username for a given name and suffix, as demonstrated by the examples below. You can assume that the format of the name is either “FIRSTNAME LASTNAME” or “FIRSTNAME MIDDLENAME LASTNAME”1
+# ’Andrew Rosen’,12 -> ar12
+# ’Alan Turing’, 5 -> at5
+# ’Andrew Benjamin Rosen’, 3 -> abr3
+# ’Andrew Benjamin Rosen’, 104 -> abr104 def makeUsername(name,n):
+
+9. (10 points) Given two strings, write a method that returns true if they are permutations of each other. Two strings are permutations of each other if they have the same numbers of each character. Use a pair of dictionaries to do this. This is a much harder problem than what would appear on the exam.
+def isPermutation(word1,word2):
+count1 = {} # keys are each character in word1
+# value is the counts of each character in word2 count2 = {} # same, but word2
+
+
+
+10. (10 points) belowAverage: Given a list of numbers, return a new list of all numbers from that list that are less than the average.
+def belowAverage(numbers):
+
+
+
+11. (10 points) sumOfTens: Given a list that contains many lists of integers, return the sum of all the integers in the lists that are multiples of 10.
+[[1,2,3,4,5,6,7,8,9,10]] -> 10 [[10,20], [5], [20,15,1,1,1]] -> 50 [[10,20,51], [10,20,30]] -> 90
+def sumOfTens(numbers):
+
+
+
+12. (10 points) Given a the name of a text file, return the sum of all the numbers in the text file. Each line of the text file is made composed of integers, separated by commas. For example, a file might look like:
+   3,4,5,1
+   10123,123,5,3
+   434,121
+   7,9,8676,6,4,1,3,4,4534
+
+
+
+
+
