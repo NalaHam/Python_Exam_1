@@ -26,8 +26,11 @@ B. 7
 C. [4,5,6] D. [7,8,9]
 
 
-4. (4 points) What is sum(LL[2])? A. 6
-B. 15 C. 24 D. 33
+4. (4 points) What is sum(LL[2])? 
+A. 6
+B. 15 
+C. 24 
+D. 33
 
 5. (10 points) Project Euler Problem 5:
 2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.
@@ -42,7 +45,22 @@ def sumDigits(num):
 
 
 7. (10 points) Write a function that returns true if the string can be spelled the same front and backwards.
-def isPalindrome(word):
+
+def isPalindrome(text):
+    reverse = "'
+    forward = ""
+    for letter in text:
+        if letter in "abc..":
+            forward = foward +letter
+            reverse = letter + reverse
+            
+    return forward == reverse
+
+
+
+
+def isPermutaion(word1, word2):
+    
 
 
 
@@ -75,6 +93,57 @@ def sumOfTens(numbers):
    10123,123,5,3
    434,121
    7,9,8676,6,4,1,3,4,4534
+
+Lucky piles Q:
+import random
+
+def create_shuffled_deck():
+        deck = ["2","3","4","5", "6", "7","8","9","10","J","Q","K","A"]*4   #creates a 52 card deck
+        random.shuffle(deck)
+        return deck
+
+def create_piles(deck):
+        pile2_Start = random.randint(1,50) #want to chose between card #2 and #51 to leave cards for pile 1 and 3
+        pile3_Start = random.randint(pile2_Start+1,51)
+        pile1 = deck[0:pile2_Start]
+        pile2 = deck[pile2_Start:pile3_Start]
+        pile3 = deck[pile3_Start:]
+        return pile1, pile2, pile3
+        
+def play_game():
+        deck = create_shuffled_deck()
+        pile1, pile2, pile3 = create_piles(deck)
+        royals = "KJQ"
+        if pile1[0] not in royals and pile2[0] not in royals and pile3[0] not in royals:
+                return True
+                
+        else return False
+        
+def simulate():
+        trails = 100000
+        wins = 0
+        for _ in range(trails):
+            if play_game == True:
+                   wins += 1
+            
+        print(wins/trails)
+            
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
